@@ -21,10 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         this.id = randomString();
         this.name = name;
-        this.element = generateTemplate('column-template', { name: this.name, id: this.id });
+        this.class = name.replace(/\s/g, '').toLowerCase();
+        this.element = generateTemplate('column-template', { name: this.name, id: this.id, class:this.class  });
 
         this.element.querySelector('.column').addEventListener('click', function (event) {
-            if (event.target.classList.contains('btn-delete')) {
+            if (event.target.classList.contains('close')) {
                 self.removeColumn();
             }
 
@@ -51,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.element.querySelector('.card').addEventListener('click', function (event) {
             event.stopPropagation();
 
-            if (event.target.classList.contains('btn-delete')) {
+            if (event.target.classList.contains('close')) {
                 self.removeCard();
             }
         });
@@ -76,6 +77,12 @@ document.addEventListener('DOMContentLoaded', function() {
             sort: true
         });
     }
+    document.querySelector('#board .create-column').addEventListener('click', function() {
+        var name = prompt('Enter a column name');
+        var column = new Column(name);
+        board.addColumn(column);
+    });
+
     // CREATING COLUMNS
     var todoColumn = new Column('To do');
     var doingColumn = new Column('Doing');
@@ -88,9 +95,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // CREATING CARDS
     var card1 = new Card('New task');
-    var card2 = new Card('Create kanban boards');
+    var card2 = new Card('Create kanban boards')
+    var card3 = new Card('Issue bug');
 
 // ADDING CARDS TO COLUMNS
     todoColumn.addCard(card1);
     doingColumn.addCard(card2);
+    doneColumn.addCard(card3);
 });
