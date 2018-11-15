@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         return str;
     }
+
+    //Generowanie templatek przez Mustache.js
     function generateTemplate(name, data, basicElement) {
         var template = document.getElementById(name).innerHTML;
         var element = document.createElement(basicElement || 'div');
@@ -30,7 +32,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             if (event.target.classList.contains('add-card')) {
-                self.addCard(new Card(prompt("Enter the name of the card")));
+                var windowPrompt = prompt("Enter the name of the card");
+                if (windowPrompt != "") {
+                    self.addCard(new Card(windowPrompt));
+                    return;
+                } else {
+                    document.querySelector('.errors-column').innerHTML = "Puste pole";
+                    return false;
+                }
             }
         });
     }
@@ -79,8 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     document.querySelector('#board .create-column').addEventListener('click', function() {
         var name = prompt('Enter a column name');
-        var column = new Column(name);
-        board.addColumn(column);
+        if(name != ''){
+            var column = new Column(name);
+            board.addColumn(column);
+        } else {
+            document.querySelector('.errors-board').innerHTML = "Puste pole";
+            return false;
+        }
+
     });
 
     // CREATING COLUMNS
