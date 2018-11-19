@@ -1,7 +1,10 @@
-function Phone(brand, price, color, discount) {
+function Phone(brand, price, color) {
     this.brand = brand;
     this.price = price;
     this.color = color;
+    this.applyDiscount = function(discount) {
+        this.price = price - discount;
+    };
 }
 
 Phone.prototype.printInfo = function() {
@@ -16,12 +19,11 @@ iPhone6S.printInfo();
 samsungGalaxyS6.printInfo();
 onePlusOne.printInfo();
 
-Phone.prototype.applyDiscount  = function(discount) {
-    this.discount = discount;
-    console.log("The phone brand is " + this.brand + ", color is " + this.color + " and the discounted price is " + (this.price - this.discount) + ".");
-}
-
 iPhone6S.applyDiscount(100);
 samsungGalaxyS6.applyDiscount(100);
 onePlusOne.applyDiscount(100);
+
+iPhone6S.printInfo();
+samsungGalaxyS6.printInfo();
+onePlusOne.printInfo();
 
