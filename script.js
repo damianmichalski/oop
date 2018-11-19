@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.name = name;
         this.class = name.replace(/\s/g, '').toLowerCase();
         this.element = generateTemplate('column-template', { name: this.name, id: this.id, class:this.class  });
+        var classError = this.class;
 
         this.element.querySelector('.column').addEventListener('click', function (event) {
             if (event.target.classList.contains('close')) {
@@ -33,11 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (event.target.classList.contains('add-card')) {
                 var windowPrompt = prompt("Enter the name of the card");
-                if (windowPrompt != "") {
+                if (windowPrompt != "" && windowPrompt != null) {
                     self.addCard(new Card(windowPrompt));
                     return;
                 } else {
-                    document.querySelector('.errors-column').innerHTML = "Puste pole";
+                    console.log('.errors-column-'+klasa);
+                    document.querySelector('.errors-column-'+classError).innerHTML = "Nie została podana żadna wartość!";
                     return false;
                 }
             }
@@ -88,11 +90,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     document.querySelector('#board .create-column').addEventListener('click', function() {
         var name = prompt('Enter a column name');
-        if(name != ''){
+        if(name != '' && name != null){
             var column = new Column(name);
             board.addColumn(column);
         } else {
-            document.querySelector('.errors-board').innerHTML = "Puste pole";
+            document.querySelector('.errors-board').innerHTML = "Nie została podana żadna wartość!";
             return false;
         }
 
