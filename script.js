@@ -6,12 +6,11 @@ function Phone(brand, price, color) {
 }
 
 Phone.prototype.printInfo = function() {
-    this.applyDiscount = function(discount) {
-        this.price = this.price - discount;
-    };
     console.log("The phone brand is " + this.brand + ", color is " + this.color + " and the price is " + this.price + ".");
 }
-
+Phone.prototype.applyDiscount = function(discount) {
+        this.price = this.price - discount;
+}
 var iPhone6S = new Phone("Apple", 2250, "silver");
 var samsungGalaxyS6 = new Phone("Samsung Galaxy S6", 1250, "gold");
 var onePlusOne = new Phone("OnePlus One", 250, "brown");
