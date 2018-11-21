@@ -2,12 +2,13 @@ function Phone(brand, price, color) {
     this.brand = brand;
     this.price = price;
     this.color = color;
-    this.applyDiscount = function(discount) {
-        this.price = price - discount;
-    };
+
 }
 
 Phone.prototype.printInfo = function() {
+    this.applyDiscount = function(discount) {
+        this.price = this.price - discount;
+    };
     console.log("The phone brand is " + this.brand + ", color is " + this.color + " and the price is " + this.price + ".");
 }
 
